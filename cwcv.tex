@@ -1,0 +1,211 @@
+\documentclass[10pt]{article}
+\usepackage{charter}
+\usepackage{fullpage}
+\usepackage[resetlabels]{multibib}
+\usepackage[ManyBibs]{currvita}
+\usepackage{ifthen}
+
+% Initialize each paper type for which you need a bibliography.
+% Just a dummy parameter is necessary.
+\newcites{refpaper}{foo}
+\newcites{unrefpaper}{foo}
+\newcites{journal}{foo}
+\newcites{techreport}{foo}
+\newcites{submitpaper}{foo}
+\newcites{classproject}{foo}
+
+% Better for lists with 1-2 items and short descriptions
+\newenvironment{sublist}{%
+	\begin{list}{}{%
+		\setlength{\itemsep}{0em}\setlength{\parsep}{0em}%
+		\setlength{\topsep}{0em}\setlength{\parskip}{0em}%
+	}%
+}%
+{ \end{list} }
+
+% Better for lists with more than 2 items and/or long descriptions
+\newenvironment{subbulletlist}{%
+	\begin{list}{\labelitemii}{%
+		\setlength{\topsep}{\itemsep}\setlength{\parskip}{\parsep}%
+	}%
+}%
+{ \end{list} }
+
+\begin{document}
+
+% Specify the bibtex style that you want for each paper type
+\bibliographystyle{unsrt}
+\bibliographystylerefpaper{unsrt}
+\bibliographystyleunrefpaper{unsrt}
+\bibliographystylesubmitpaper{unsrt}
+\bibliographystylejournal{unsrt}
+\bibliographystyletechreport{unsrt}
+\bibliographystyleclassproject{ieeetr}
+
+% We'll use this length to change the defaults in some of our lists.
+\newlength{\oldcvlabelwidth}
+\renewcommand*{\cvbibname}{}
+
+% This is what will appear at the very top of your CV.
+\begin{cv}{Cheng Wei\\{\large \itshape Curriculum Vitae}}
+
+% Items have more vertical space between them than line breaks.
+\begin{cvlist}{Contact}
+	\item
+	Department of Computer Science\\
+	School of Computing
+        AS6 05-22 Multimedia System Lab\\
+        Singapore, 117543
+	\item Phone: +6581289359
+	\item chengwe2@comp.nus.edu.sg
+	% The tilde doesn't show up well in LaTeX, the \sim symbol looks
+	% much better.  Though, you can't copy and paste it from your PDF
+	% like you can with a tilde.
+	\item http://www.comp.nus.edu.sg/$\sim$chengwe2/
+\end{cvlist}
+
+\begin{cvlist}{Research Interests}
+	\item Currently I am working on System support for multimedia applications,
+              especially in streaming 3D models over network and distributed virtual environment.
+              My other research interests include Computer Graphics, Distributed System,
+              Peer-to-Peer System, and Concurrent Programming.
+\end{cvlist}
+
+\begin{cvlist}{Education}
+	\item \emph{Ph.D., Computer Science}, Est. Dec 2009\\
+	National University of Singapore\\
+        Singapore
+	% Sublists don't have any extra vertial space.
+	\item \emph{M.Eng, Communication Science and Engineering}, 2005\\ 
+	Fudan University\\
+	Shanghai, China
+	%\begin{sublist}
+	%	\item Thesis: \textit{Minimizing Energy Consumption in Sensor
+	%	Networks Using a Wakeup Radio}
+	%	\item Adviser: Prof. Nitin H. Vaidya
+	%\end{sublist}
+	\item \emph{B.Eng, Civil Engineering}, 1996\\
+	Tongji University\\
+	Shanghai, China
+	%\begin{sublist}
+	%	\item GPA: 4.0/4.0
+	%	\item Minors: \emph{Computer Science} and \emph{Mathematics}
+	%\end{sublist}
+\end{cvlist}
+
+\begin{cvlist}{Honors}
+\item
+    \emph{Dean's Graduate Research Excellence Award}
+	\begin{sublist}
+	\item School of Computing, NUS, 2009
+	%\item Acceptance Percentage: 16.2\% (903/5560)
+	\end{sublist}
+\item
+    \emph{Best Paper Award, ACM Multimedia 2008}
+	%Engineering Graduate Fellowship}
+	\begin{sublist}
+	\item ACM Multimedia 2008
+	%\item Acceptance Percentage: 21.3\% (285/1339)
+	\end{sublist}
+\end{cvlist}
+
+% cvlist items can take dates as a parameter.
+\begin{cvlist}{Employment}
+    \item[8/2008--11/2008] Part Time Teaching Assistant
+	\item[8/2007--11/2007] Part Time Teaching Assistant\\
+	National of University of Singapore\\ 
+	Singapore
+	\item[6/2005--7/2005] Intern\\ 
+	Alcatel Shanghai Bell Inc.\\
+	Shanghai, China
+        \item[7/1996--9/2001] Civil Engineer\\
+        East China Civil Aviation Airport Design Institute\\
+        Shanghai, China 
+\end{cvlist}
+% After you have finished your CV, you may need to manually insert
+% some pagebreaks to make it look nice.
+\pagebreak
+
+
+
+% These commands will make our papers be indented after the first line
+% to make the author's name stand out more.  Also, we reduce the
+% indentation of the paper type titles (e.g., Journal Papers,
+% Conference Paper) compared to regular cvlist items.
+\setlength{\oldcvlabelwidth}{\cvlabelwidth}
+\setlength{\cvlabelwidth}{1em}
+\renewcommand*{\bibindent}{1.5em}
+% Do bibaddtoleftmargin instead of biblabelsep if you're
+% not using manybib or open bib
+%\renewcommand*{\bibaddtoleftmargin}{1.5em}
+\renewcommand*{\biblabelsep}{1.5em}
+
+% To update, before doing latexmk, run:
+% bibtex journal
+% bibtex refpaper
+% bibtex unrefpaper
+% bibtex techreport
+\begin{cvlist}{Publications}
+	% With multibib, each cite command has the type after it.
+	%\item \textbf{Journal Papers}
+	%\nocitejournal{miller04mac_vitae}
+	%\bibliographyjournal{vitae}
+    \item \textbf{Journal Papers}
+    \nocitejournal{compact:mondet}
+    \nocitejournal{integrated:hang}
+	\bibliographyjournal{cwcv}
+	\item \textbf{Conference Papers} 
+    \nociterefpaper{peer:cheng}
+    \nociterefpaper{towards:ransi}
+	\nociterefpaper{streaming:sebastien}
+	\nociterefpaper{streaming:cheng}
+	\nociterefpaper{Cheng2008}
+	\nociterefpaper{cheng07analytical}
+	\bibliographyrefpaper{cwcv}
+	%\item \textbf{Accepted Papers} 
+	%\bibliographysubmitpaper{cwcv}
+	%\item \textbf{Technical Reports} 
+	%\nocitetechreport{miller05errata_vitae}
+	%\nocitetechreport{miller04ondemand_vitae}
+	%\nocitetechreport{miller03hybrid_vitae}
+	%\bibliographytechreport{vitae}
+\end{cvlist}
+% Reset the label indentation
+\setlength{\cvlabelwidth}{\oldcvlabelwidth}
+
+\setlength{\oldcvlabelwidth}{\cvlabelwidth}
+\setlength{\cvlabelwidth}{1em}
+
+
+\begin{cvlist}{Memberships and Activities}
+	\item[2008--present] ACM Student Member
+    \item[2008--present] IEEE Graduate Student Member
+    \item[6/2009--8/2009] Visiting Student to Singapore-MIT Gabmit Lab, MIT, Boston, USA
+\end{cvlist}
+
+\setlength{\oldcvlabelwidth}{\cvlabelwidth}
+\setlength{\cvlabelwidth}{1em}
+\begin{cvlist}{Technical Skills}
+	\item \textbf{Languages (most familiar to least familiar)}
+	\begin{sublist}
+    \item C, Python, C++, Lua, Erlang, Java, D, OCaml, Clojure, Haskell
+	\end{sublist}
+	\item \textbf{Area} 
+	\begin{sublist}
+		\item Linux Programming, OpenGL programming, Concurrent programming
+        \end{sublist}
+\end{cvlist}
+\setlength{\cvlabelwidth}{\oldcvlabelwidth}
+
+\setlength{\oldcvlabelwidth}{\cvlabelwidth}
+\setlength{\cvlabelwidth}{1em}
+\begin{cvlist}{Miscellaneous}
+\item \textit{Citizenship:} China
+\item \textit{Marital Status:} Married
+%\item \textit{Erd\"{o}s Number:} $\leq 4$
+\end{cvlist}
+\setlength{\cvlabelwidth}{\oldcvlabelwidth}
+
+\end{cv}
+\end{document}
+
